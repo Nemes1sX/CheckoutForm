@@ -8,6 +8,7 @@ use Tests\TestCase;
 
 class CreateOrderFeatureTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      */
@@ -19,14 +20,20 @@ class CreateOrderFeatureTest extends TestCase
             'last_name' => 'Pavardenis',
             'country' => 'USA',
             'region' => 'California',
-            'address' => 'Haha st. 5, El Segundo'
+            'address' => 'Haha st. 5, El Segundo',
+            'card_number' => '4444555588889999',
+            'cvv' => '562'
         ];
 
         //Act
-        $response = $this->post('/api/orders');
+        $response = $this->json('post','/api/orders', $order);
 
-        //Assert
-        $response->assertStatus(200);
+        /*print_r($order);
+        echo json_encode($response, JSON_PRETTY_PRINT);*/
+        //Arrange
+        $response->assertStatus(200)->assertJsonStructure([
+            'message'
+        ]);
     }
 
     public function test_failed_order_post(): void
@@ -40,10 +47,7 @@ class CreateOrderFeatureTest extends TestCase
             'address' => 'Haha st. 5, El Segundo'
         ];
 
-        //Act
-        $response = $this->post('/api/orders');
-
-        //Assert
-        $response->assertStatus(422);
+        //Act & Assert
+        $this->json('post', '/api/orders', $order)->assertStatus(422);
     }
 }

@@ -11,7 +11,7 @@ class OrderController extends Controller
     public function store(StoreOrderFormRequest $request, OrderService $orderService)
     {
         $orderService->create($request->first_name, $request->last_name, $request->country, $request->region,
-            $request->city);
+            $request->address);
 
         return response()->json([
             'message' => 'Order was saved successfully'

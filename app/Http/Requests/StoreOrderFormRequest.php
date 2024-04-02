@@ -27,8 +27,8 @@ class StoreOrderFormRequest extends FormRequest
             'region' => ['required', 'string', 'min:3', 'max:30'],
             'country' => ['required', 'string', 'min:3', 'max:30'],
             'address' => ['required', 'string', 'min:3', 'max:60'],
-            'card_number' => ['required', 'numeric', 'size:16'],
-            'cvv' => ['required', 'numeric', 'size:3'],
+            'card_number' => ['required', 'numeric', 'regex:/^\d{16}$/'],
+            'cvv' => ['required', 'numeric', 'regex:/^\d{3}$/'],
         ];
     }
 }
