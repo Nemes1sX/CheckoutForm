@@ -10,6 +10,6 @@ class OrderItemService
 {
     public function create(Order $order, array $orderItems)
     {
-        $order->orderItems()->create($orderItems);
+        $order->orderItems()->createMany($orderItems);
     }
 }

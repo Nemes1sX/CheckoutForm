@@ -22,7 +22,7 @@ class OrderItemUnitTest extends TestCase
     /**
      * A basic unit test example.
      */
-    public function test_example(): void
+    public function test_create_order_items(): void
     {
         //Act
         $orderItems = [
@@ -40,7 +40,7 @@ class OrderItemUnitTest extends TestCase
             ]
         ];
 
-        $order = [
+        $orderData = [
             'first_name' => 'Vardenis',
             'last_name' => 'Pavardenis',
             'country' => 'USA',
@@ -49,10 +49,11 @@ class OrderItemUnitTest extends TestCase
         ];
 
         //Act
-        $order = $this->orderService->create($order['first_name'], $order['last_name'], $order['country'],
-            $order['region'], $order['address']);
+        $order = $this->orderService->create($orderData['first_name'], $orderData['last_name'], $orderData['country'],
+            $orderData['region'], $orderData['address']);
         $this->orderItemService->create($order, $orderItems);
 
-        $this->assertDatabaseHas('order_items', $orderItems);
+
+        $this->assertDatabaseHas('order_items', [$orderItems]);
     }
 }

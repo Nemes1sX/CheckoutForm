@@ -15,6 +15,22 @@ class CreateOrderFeatureTest extends TestCase
     public function test_successfull_order_post(): void
     {
         //Arrange
+
+        $orderItems = [
+            [
+                'name' => 'Trainers',
+                'price' => 68,
+                'quantity' => 2,
+                'currency' => 'EUR'
+            ],
+            [
+                'name' => 'Jacket',
+                'price' => 76,
+                'quantity' => 2,
+                'currency' => 'EUR'
+            ]
+        ];
+
         $order = [
             'first_name' => 'Vardenis',
             'last_name' => 'Pavardenis',
@@ -23,7 +39,8 @@ class CreateOrderFeatureTest extends TestCase
             'address' => 'Haha st. 5, El Segundo',
             'card_number' => '4444555588889999',
             'cvv' => '562',
-            'expiry_date' => '2025-07'
+            'expiry_date' => '2025-07',
+            'cart' => $orderItems
         ];
 
         //Act
