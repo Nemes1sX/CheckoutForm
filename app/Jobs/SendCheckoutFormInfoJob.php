@@ -18,18 +18,20 @@ class SendCheckoutFormInfoJob implements ShouldQueue
     protected string $country;
     protected string $region;
     protected string $address;
+    protected array $cart;
 
 
     /**
      * Create a new message instance.
      */
-    public function __construct($firstName, $lastName, $country, $region, $address)
+    public function __construct($firstName, $lastName, $country, $region, $address, $cart)
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->country = $country;
         $this->region = $region;
         $this->address = $address;
+        $this->cart = $cart;
     }
 
 
@@ -39,6 +41,6 @@ class SendCheckoutFormInfoJob implements ShouldQueue
     public function handle(): void
     {
         Mail::to('test@mail.com')->send(new OrderMail($this->firstName, $this->lastName,
-            $this->country,$this->region, $this->address));
+            $this->country,$this->region, $this->address, $this->cart));
     }
 }

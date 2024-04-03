@@ -18,18 +18,20 @@ class OrderMail extends Mailable
     protected string $country;
     protected string $region;
     protected string $address;
+    protected array $cart;
 
 
     /**
      * Create a new message instance.
      */
-    public function __construct($firstName, $lastName, $country, $region, $address)
+    public function __construct($firstName, $lastName, $country, $region, $address, $cart)
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->country = $country;
         $this->region = $region;
         $this->address = $address;
+        $this->cart = $cart;
     }
 
     /**
@@ -54,7 +56,8 @@ class OrderMail extends Mailable
                 'lastName' => $this->lastName,
                 'country' => $this->country,
                 'region' => $this->region,
-                'address' => $this->address
+                'address' => $this->address,
+                'cart' => $this->cart
             ]
         );
     }
