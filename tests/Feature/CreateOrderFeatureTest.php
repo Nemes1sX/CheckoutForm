@@ -22,14 +22,14 @@ class CreateOrderFeatureTest extends TestCase
             'region' => 'California',
             'address' => 'Haha st. 5, El Segundo',
             'card_number' => '4444555588889999',
-            'cvv' => '562'
+            'cvv' => '562',
+            'expiry_date' => '2025-07'
         ];
 
         //Act
         $response = $this->json('post','/api/orders', $order);
 
-        /*print_r($order);
-        echo json_encode($response, JSON_PRETTY_PRINT);*/
+
         //Arrange
         $response->assertStatus(200)->assertJsonStructure([
             'message'

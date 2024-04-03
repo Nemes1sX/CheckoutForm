@@ -7,9 +7,9 @@ use App\Models\Order;
 class OrderService
 {
 
-    public function create($firstName, $lastName, $country, $region, $address) : void
+    public function create($firstName, $lastName, $country, $region, $address) : Order
     {
-        Order::create([
+       return Order::create([
            'first_name' => $firstName,
             'last_name' => $lastName,
             'region' => $region,

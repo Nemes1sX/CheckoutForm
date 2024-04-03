@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreOrderFormRequest extends FormRequest
@@ -29,6 +30,7 @@ class StoreOrderFormRequest extends FormRequest
             'address' => ['required', 'string', 'min:3', 'max:60'],
             'card_number' => ['required', 'numeric', 'regex:/^\d{16}$/'],
             'cvv' => ['required', 'numeric', 'regex:/^\d{3}$/'],
+            'expiry_date' => ['required', 'date_format:Y-m', 'after_or_equal:'.Carbon::now()->format('Y-m')]
         ];
     }
 }
