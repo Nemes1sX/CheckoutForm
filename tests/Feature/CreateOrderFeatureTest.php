@@ -48,6 +48,14 @@ class CreateOrderFeatureTest extends TestCase
 
 
         //Arrange
+        $this->assertDatabaseHas('orders', [
+            'first_name' => $order['first_name'],
+            'last_name' => $order['last_name'],
+            'country' => $order['country'],
+            'region' => $order['region'],
+            'address' => $order['address'],
+        ]);
+        $this->assertDatabaseHas('order_items', [$orderItems]);
         $response->assertStatus(200)->assertJsonStructure([
             'message'
         ]);
@@ -64,7 +72,10 @@ class CreateOrderFeatureTest extends TestCase
             'address' => 'Haha st. 5, El Segundo'
         ];
 
-        //Act & Assert
-        $this->json('post', '/api/orders', $order)->assertStatus(422);
+        //Act
+        $response = $this->json('post', '/api/orders', $order);
+
+        //Arrange
+        $response->assertStatus(422);
     }
 }
